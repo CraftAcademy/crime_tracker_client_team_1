@@ -1,0 +1,28 @@
+#header {
+  padding-top: 2em;
+  padding-left: 3em;
+  height: 4em;
+}
+
+#header-txt {
+  font-size: 3em;
+  color: #b8b894;
+  margin-right: 3em;
+}
+
+#footer {
+  margin-top: 2em;
+  height: 2em;
+}
+
+.index-img {
+  height: 15em;
+  width: 25em;
+  margin-right: 5em;
+}
+
+#teaser {
+margin-top: 1em;
+font-size: 2em;
+font-weight: bold;
+}

@@ -2,7 +2,10 @@ import LoginForm from "./components/LoginForm";
 import DisplayCrimeData from "./components/DisplayCrimeData";
 import { authenticate } from "./modules/authenticate";
 import React, { Component } from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Grid, Container, GridColumn } from "semantic-ui-react";
+import CrimeHeader from "./components/CrimeHeader";
+import Footer from "./components/Footer";
+import crime from "./img/crime.jpg";
 
 class App extends Component {
   state = {
@@ -58,14 +61,29 @@ class App extends Component {
       default:
         break;
     }
-    
 
     return (
       <>
-        <h1 data-cy="header"> Log in to read the entire crime report</h1>
-        <div id="render"> {renderLogin} </div>
+        <CrimeHeader />
+        <Container>
+          <Grid>
+            <Grid.Row columns={2}>
+              <GridColumn>
+                <img className="index-img" src={crime} alt="crime"></img>
+              </GridColumn>
+              <GridColumn>
+                <h1 data-cy="header">
+                  {" "}
+                  Log in to read the entire crime report
+                </h1>
+                <div id="render"> {renderLogin} </div>
+              </GridColumn>
+            </Grid.Row>
 
-        <DisplayCrimeData authenticated={this.state.authenticated} />
+            <DisplayCrimeData authenticated={this.state.authenticated} />
+          </Grid>
+        </Container>
+        <Footer />
       </>
     );
   }

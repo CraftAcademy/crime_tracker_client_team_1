@@ -1,7 +1,11 @@
-import { fetchTeaserListData, fetchContentListData } from "../modules/crimeReports";
-import parse from "html-react-parser";
-import React, { Component } from "react";
+import {
+  fetchTeaserListData,
+  fetchContentListData,
+} from "../modules/crimeReports";
+/* import parse from "html-react-parser"; */
 import { Bar } from "react-chartjs-2";
+import React, { Component } from "react";
+import { Button } from "semantic-ui-react";
 
 class DisplayCrimeData extends Component {
   state = {
@@ -15,7 +19,6 @@ class DisplayCrimeData extends Component {
   readMore = async () => {
     let crimeData = await fetchContentListData();
     this.setState({ crimeData: crimeData });
-    
   };
 
   render() {
@@ -47,17 +50,24 @@ class DisplayCrimeData extends Component {
     }
 
     const authenticated = this.props.authenticated;
-    let readMoreButton
-    if(authenticated) {
-      readMoreButton = (<button data-cy="read-more" onClick={this.readMore}>Read more</button>) }
+    let readMoreButton;
+    if (authenticated) {
+      readMoreButton = (
+        <Button data-cy="read-more" onClick={this.readMore}>
+          Read more
+        </Button>
+      );
+    }
 
     let teaserList = this.state.crimeData.map((report) => {
       return (
         <div data-cy={"data-" + report.id} key={report.id}>
-          <h3 data-cy="teaser">{report.description}</h3>
-          <h3 data-cy="teaser">{report.content}</h3>
-
-
+          <p data-cy="teaser" id="teaser">
+            {report.description}
+          </p>
+          <p data-cy="teaser" id="content">
+            {report.content}
+          </p>
         </div>
       );
     });
@@ -67,6 +77,7 @@ class DisplayCrimeData extends Component {
         <h1>Crime Reports</h1>
         {teaserList}
         {readMoreButton}
+        {graph}
       </div>
     );
   }
