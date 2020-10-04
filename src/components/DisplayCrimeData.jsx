@@ -3,7 +3,7 @@ import {
   fetchContentListData,
 } from "../modules/crimeReports";
 /* import parse from "html-react-parser"; */
-import { Bar } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import React, { Component } from "react";
 import { Button } from "semantic-ui-react";
 
@@ -22,34 +22,34 @@ class DisplayCrimeData extends Component {
   };
 
   render() {
+    const authenticated = this.props.authenticated;
     let graph;
-    let location = [];
-    let types = [];
 
-    if (this.state.crimeData !== null) {
-      this.state.crimeData.forEach((data) => {
-        types.push(data.title_type);
-        location.push(data.title_location);
-      });
-      const crimeGraph = {
-        datasets: [
-          {
-            data: types,
-            location: location,
-            label: "crime type",
-          },
-        ],
-        location: location,
-      };
+    if (authenticated) {
+      let location = [];
+      let types = [];
 
-      graph = (
-        <>
-          <Bar data={crimeGraph} />
-        </>
-      );
+      if (this.state.crimeData !== null) {
+        this.state.crimeData.forEach((data) => {
+          types.push(data.title_type);
+          location.push(data.title_location);
+        });
+        const crimeGraph = {
+          datasets: [
+            {
+              data: [10, 3, 4, 6, 4, 3],
+            },
+          ],
+          label: ["Stockholm"],
+        };
+        graph = (
+          <>
+            <Pie data={crimeGraph} />
+          </>
+        );
+      }
     }
 
-    const authenticated = this.props.authenticated;
     let readMoreButton;
     if (authenticated) {
       readMoreButton = (
@@ -75,8 +75,8 @@ class DisplayCrimeData extends Component {
     return (
       <div>
         <h1>Crime Reports</h1>
-        {teaserList}
         {readMoreButton}
+        {teaserList}
         {graph}
       </div>
     );
