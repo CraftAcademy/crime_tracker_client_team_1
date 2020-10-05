@@ -4,6 +4,7 @@ import {
 } from "../modules/crimeReports";
 import { Pie } from "react-chartjs-2";
 import React, { Component } from "react";
+import parse from "html-react-parser";
 import { Button } from "semantic-ui-react";
 
 class DisplayCrimeData extends Component {
@@ -52,7 +53,7 @@ class DisplayCrimeData extends Component {
     let readMoreButton;
     if (authenticated) {
       readMoreButton = (
-        <Button data-cy="read-more" id='read-more' onClick={this.readMore}>
+        <Button data-cy="read-more" id="read-more" onClick={this.readMore}>
           Read more
         </Button>
       );
@@ -64,9 +65,11 @@ class DisplayCrimeData extends Component {
           <p data-cy="teaser" id="teaser">
             {report.description}
           </p>
-          <p data-cy="teaser" id="content">
-            {report.content}
-          </p>
+          {report.content && (
+            <p data-cy="teaser" id="content">
+              {parse(`${report.content}`)}
+            </p>
+          )}
         </div>
       );
     });
