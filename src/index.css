@@ -25,4 +25,11 @@
 margin-top: 1em;
 font-size: 2em;
 font-weight: bold;
+text-decoration: underline;
+text-shadow: 2px 2px 5px gray;
+}
+
+#read-more {
+  border-radius: 4px;
+  border: 3px solid #0976b5;
 }
