@@ -2,7 +2,6 @@ import {
   fetchTeaserListData,
   fetchContentListData,
 } from "../modules/crimeReports";
-/* import parse from "html-react-parser"; */
 import { Pie } from "react-chartjs-2";
 import React, { Component } from "react";
 import { Button } from "semantic-ui-react";
@@ -53,7 +52,7 @@ class DisplayCrimeData extends Component {
     let readMoreButton;
     if (authenticated) {
       readMoreButton = (
-        <Button data-cy="read-more" onClick={this.readMore}>
+        <Button data-cy="read-more" id='read-more' onClick={this.readMore}>
           Read more
         </Button>
       );
@@ -74,7 +73,6 @@ class DisplayCrimeData extends Component {
 
     return (
       <div>
-        <h1>Crime Reports</h1>
         {readMoreButton}
         {teaserList}
         {graph}
